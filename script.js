@@ -225,6 +225,11 @@ function atualizarCapa(){
   document.getElementById('out-telefone').textContent = telefone;
   document.getElementById('out-instagram').textContent = instagram;
 
+  // --- Página "Como funciona": rodapé (mesmos dados da empresa) ---
+  document.getElementById('pcf-out-telefone-footer').textContent = telefone;
+  document.getElementById('pcf-out-email-footer').textContent = email;
+  document.getElementById('pcf-out-instagram-footer').textContent = instagram;
+
   // --- Página 2: dados da proposta ---
   document.getElementById('p2-out-data').textContent = dataFormatada;
   document.getElementById('p2-out-validade').textContent = validadeFormatada;

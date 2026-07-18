@@ -125,7 +125,7 @@ function renderizarGrafico(producaoMensal, consumoMensal){
   const container = document.getElementById('p4-grafico');
   if(!container) return;
 
-  const largura = 500, altura = 190, baseY = 160, topoY = 10;
+  const largura = 500, altura = 300, baseY = 260, topoY = 15;
   const maxValor = Math.max(...producaoMensal, ...consumoMensal, 1);
   const escalaY = (baseY - topoY) / maxValor;
   const larguraGrupo = largura / 12;

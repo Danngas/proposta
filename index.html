@@ -199,6 +199,175 @@
 </svg>
 </section>
 
+<!-- ===================== PÁGINA 2 — ITENS DA PROPOSTA ===================== -->
+<section class="page page2" id="pagina2">
+
+  <div class="p2-header">
+    <div class="p2-badge">03</div>
+    <h2 class="p2-title">PROPOSTA COMERCIAL</h2>
+    <img src="images/logo-enner.png" alt="Enner Engenharia" class="p2-logo">
+  </div>
+
+  <div class="p2-cards">
+    <!-- CARD ESQUERDO: dados da proposta / empresa -->
+    <div class="p2-card p2-card-light">
+      <div class="p2-row p2-row-split">
+        <div class="p2-field">
+          <span class="p2-icon">📅</span>
+          <div>
+            <span class="p2-label">DATA DA<br>PROPOSTA</span>
+            <span class="p2-value" id="p2-out-data">—</span>
+          </div>
+        </div>
+        <div class="p2-field">
+          <span class="p2-icon">🕐</span>
+          <div>
+            <span class="p2-label">Validade até</span>
+            <span class="p2-value" id="p2-out-validade">—</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="p2-field">
+        <span class="p2-icon">👤</span>
+        <div>
+          <span class="p2-label">REPRESENTANTE</span>
+          <span class="p2-value" id="p2-out-representante">—</span>
+        </div>
+      </div>
+
+      <div class="p2-field">
+        <span class="p2-icon">📞</span>
+        <div>
+          <span class="p2-label">telefone</span>
+          <span class="p2-value" id="p2-out-telefone">—</span>
+        </div>
+      </div>
+
+      <div class="p2-field">
+        <span class="p2-icon">✉️</span>
+        <div>
+          <span class="p2-label">e-mail</span>
+          <span class="p2-value" id="p2-out-email">—</span>
+        </div>
+      </div>
+
+      <div class="p2-field">
+        <span class="p2-icon">📷</span>
+        <div>
+          <span class="p2-label">instagram</span>
+          <span class="p2-value" id="p2-out-instagram">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD DIREITO: dados do cliente, com foto de fundo -->
+    <div class="p2-card p2-card-dark" style="background-image: linear-gradient(100deg, rgba(10,20,40,0.97) 30%, rgba(10,20,40,0.55) 65%, rgba(10,20,40,0.25) 100%), url('images/cliente-bg-panels.png');">
+      <div class="p2-field">
+        <span class="p2-icon p2-icon-round">👤</span>
+        <span class="p2-label-dark">cliente</span>
+      </div>
+      <div class="p2-cliente-nome" id="p2-out-cliente">—</div>
+      <div class="p2-field">
+        <span class="p2-icon-inline">📍</span>
+        <span class="p2-cliente-cidade" id="p2-out-cidade">—</span>
+      </div>
+      <div class="p2-cliente-endereco" id="p2-out-endereco">—</div>
+    </div>
+  </div>
+
+  <!-- ITENS DA PROPOSTA -->
+  <div class="p2-section-title">
+    <span class="p2-section-icon">🗒️</span> ITENS <span class="accent-orange">DA PROPOSTA</span>
+  </div>
+
+  <table class="p2-table">
+    <thead>
+      <tr><th>SERVIÇO</th><th>DESCRIÇÃO</th><th>QTD.</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="p2-servico"><span class="p2-servico-icon">🔲</span><span id="p2-item-kit-titulo">Kit</span></td>
+        <td><ul class="p2-checklist" id="p2-item-kit-desc"></ul></td>
+        <td class="p2-qtd" id="p2-item-kit-qtd">01</td>
+      </tr>
+      <tr>
+        <td class="p2-servico"><span class="p2-servico-icon">⚙️</span><span id="p2-item-engenharia-titulo">engenharia</span></td>
+        <td><ul class="p2-checklist" id="p2-item-engenharia-desc"></ul></td>
+        <td class="p2-qtd" id="p2-item-engenharia-qtd">01</td>
+      </tr>
+      <tr>
+        <td class="p2-servico"><span class="p2-servico-icon">🛠️</span><span id="p2-item-instalacao-titulo">instalação</span></td>
+        <td><ul class="p2-checklist" id="p2-item-instalacao-desc"></ul></td>
+        <td class="p2-qtd" id="p2-item-instalacao-qtd">01</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- DESTAQUES + KIT FOTOVOLTAICO -->
+  <div class="p2-lowcards">
+    <div class="p2-lowcard p2-lowcard-light">
+      <h3>DESTAQUES DO SISTEMA</h3>
+      <div class="p2-destaque">
+        <span class="p2-destaque-icon">⚡</span>
+        <div>
+          <span class="p2-destaque-titulo">Geração média mensal</span>
+          <span class="p2-destaque-valor"><strong id="p2-out-geracao">10.000</strong> kWh/mês</span>
+          <span class="p2-destaque-sub">Estimativa de geração de energia</span>
+        </div>
+      </div>
+      <div class="p2-destaque">
+        <span class="p2-destaque-icon">💲</span>
+        <div>
+          <span class="p2-destaque-titulo">Economia garantida</span>
+          <span class="p2-destaque-sub">Reduza sua conta de energia em até <strong id="p2-out-economia">95</strong>%.</span>
+        </div>
+      </div>
+      <div class="p2-destaque">
+        <span class="p2-destaque-icon">🍃</span>
+        <div>
+          <span class="p2-destaque-titulo">Energia limpa e renovável</span>
+          <span class="p2-destaque-sub">Mais economia e sustentabilidade para você e para o planeta</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="p2-lowcard p2-lowcard-dark">
+      <h3>KIT FOTOVOLTAICO</h3>
+      <div class="p2-kit-photos">
+        <img src="images/painel.webp" alt="Painel solar">
+        <img src="images/inversor.png" alt="Inversor">
+        <img src="images/estrutura.webp" alt="Estrutura de fixação">
+      </div>
+      <div class="p2-kit-feats">
+        <div><span>🛡️</span>Equipamentos de alta qualidade</div>
+        <div><span>🧰</span>Garantia do fabricante</div>
+        <div><span>📈</span>Alta eficiência e desempenho</div>
+        <div><span>🏅</span>Instalação profissional</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POR QUE ESCOLHER A ENNER -->
+  <div class="p2-why">
+    <h3>POR QUE ESCOLHER A <span class="accent-orange">ENNER</span>?</h3>
+    <div class="p2-why-grid">
+      <div><span class="p2-why-icon">🛡️</span><strong>Experiência</strong><p>Profissionais especializados em energia solar</p></div>
+      <div><span class="p2-why-icon">👍</span><strong>Atendimento</strong><p>Acompanhamento completo do início ao fim</p></div>
+      <div><span class="p2-why-icon">🔒</span><strong>Segurança</strong><p>Projetos e instalações seguindo as normas</p></div>
+      <div><span class="p2-why-icon">🎧</span><strong>Suporte</strong><p>Suporte técnico dedicado e pós-venda</p></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="p2-footer">
+    <span>📞 <span id="p2-out-telefone-footer">—</span></span>
+    <span>✉️ <span id="p2-out-email-footer">—</span></span>
+    <span>📷 <span id="p2-out-instagram-footer">—</span></span>
+  </div>
+
+</section>
+
 <!-- ===================== FORMULÁRIO DE DADOS (não impresso) ===================== -->
 <section class="page form-panel no-print" id="formulario">
   <h2>Dados da Proposta</h2>
@@ -239,6 +408,58 @@
     <legend>Local</legend>
     <label>Cidade / UF
       <input type="text" id="in-cidade" placeholder="Ex: Santa Maria da Vitória – BA">
+    </label>
+    <label>Endereço
+      <input type="text" id="in-endereco" placeholder="Ex: Rua Exemplo, 100">
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Itens da proposta</legend>
+
+    <label>Kit fotovoltaico — título
+      <input type="text" id="in-kit-titulo" placeholder="Kit fotovoltaico">
+    </label>
+    <label>Kit fotovoltaico — itens (um por linha)
+      <textarea id="in-kit-desc" rows="3" placeholder="SAJ R6-10K
+20 módulos 610 W
+Cabos, String Box CC e Quadro CA"></textarea>
+    </label>
+    <label>Kit fotovoltaico — quantidade
+      <input type="text" id="in-kit-qtd" placeholder="01">
+    </label>
+
+    <label>Engenharia — título
+      <input type="text" id="in-engenharia-titulo" placeholder="Engenharia">
+    </label>
+    <label>Engenharia — itens (um por linha)
+      <textarea id="in-engenharia-desc" rows="3" placeholder="Vistoria e visita técnica
+Homologação
+Comissionamento
+Monitoramento"></textarea>
+    </label>
+    <label>Engenharia — quantidade
+      <input type="text" id="in-engenharia-qtd" placeholder="01">
+    </label>
+
+    <label>Instalação — título
+      <input type="text" id="in-instalacao-titulo" placeholder="Instalação">
+    </label>
+    <label>Instalação — itens (um por linha)
+      <textarea id="in-instalacao-desc" rows="2" placeholder="Incluso"></textarea>
+    </label>
+    <label>Instalação — quantidade
+      <input type="text" id="in-instalacao-qtd" placeholder="01">
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Destaques do sistema</legend>
+    <label>Geração média mensal (kWh/mês)
+      <input type="text" id="in-geracao" placeholder="10.000">
+    </label>
+    <label>Economia garantida (%)
+      <input type="text" id="in-economia" placeholder="95">
     </label>
   </fieldset>
 

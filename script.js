@@ -17,7 +17,29 @@ const DADOS_PADRAO_FALLBACK = {
     cliente: "Francisco",
     representante: "Eng. Hiago Macedo",
     cidade: "Santa Maria da Vitória – BA",
-    validadeDias: 5
+    endereco: "Rua Exemplo, 100",
+    validadeDias: 5,
+    itens: {
+      kit: {
+        titulo: "Kit fotovoltaico",
+        qtd: "01",
+        descricao: ["SAJ R6-10K", "20 módulos 610 W", "Cabos, String Box CC e Quadro CA"]
+      },
+      engenharia: {
+        titulo: "Engenharia",
+        qtd: "01",
+        descricao: ["Vistoria e visita técnica", "Homologação", "Comissionamento", "Monitoramento"]
+      },
+      instalacao: {
+        titulo: "Instalação",
+        qtd: "01",
+        descricao: ["Incluso"]
+      }
+    },
+    destaques: {
+      geracaoMensalKwh: "10.000",
+      economiaPercentual: "95"
+    }
   }
 };
 
@@ -64,22 +86,63 @@ function preencherFormularioComDados(dados){
   if(proposta.cliente)        document.getElementById('in-cliente').value = proposta.cliente;
   if(proposta.representante)  document.getElementById('in-representante').value = proposta.representante;
   if(proposta.cidade)         document.getElementById('in-cidade').value = proposta.cidade;
+  if(proposta.endereco)       document.getElementById('in-endereco').value = proposta.endereco;
   if(proposta.validadeDias)   document.getElementById('in-validade-dias').value = proposta.validadeDias;
+
+  const itens = proposta.itens || {};
+  if(itens.kit){
+    document.getElementById('in-kit-titulo').value = itens.kit.titulo || '';
+    document.getElementById('in-kit-desc').value = (itens.kit.descricao || []).join('\n');
+    document.getElementById('in-kit-qtd').value = itens.kit.qtd || '';
+  }
+  if(itens.engenharia){
+    document.getElementById('in-engenharia-titulo').value = itens.engenharia.titulo || '';
+    document.getElementById('in-engenharia-desc').value = (itens.engenharia.descricao || []).join('\n');
+    document.getElementById('in-engenharia-qtd').value = itens.engenharia.qtd || '';
+  }
+  if(itens.instalacao){
+    document.getElementById('in-instalacao-titulo').value = itens.instalacao.titulo || '';
+    document.getElementById('in-instalacao-desc').value = (itens.instalacao.descricao || []).join('\n');
+    document.getElementById('in-instalacao-qtd').value = itens.instalacao.qtd || '';
+  }
+
+  const destaques = proposta.destaques || {};
+  if(destaques.geracaoMensalKwh) document.getElementById('in-geracao').value = destaques.geracaoMensalKwh;
+  if(destaques.economiaPercentual) document.getElementById('in-economia').value = destaques.economiaPercentual;
 
   atualizarCapa();
 }
 
 function limparFormulario(){
-  ['in-email','in-telefone','in-instagram','in-cliente','in-representante','in-cidade']
+  ['in-email','in-telefone','in-instagram','in-cliente','in-representante','in-cidade','in-endereco',
+   'in-kit-titulo','in-kit-desc','in-kit-qtd',
+   'in-engenharia-titulo','in-engenharia-desc','in-engenharia-qtd',
+   'in-instalacao-titulo','in-instalacao-desc','in-instalacao-qtd',
+   'in-geracao','in-economia']
     .forEach(id => document.getElementById(id).value = '');
   document.getElementById('in-validade-dias').value = 5;
   atualizarCapa();
+}
+
+function preencherChecklist(ulId, itensTexto){
+  const ul = document.getElementById(ulId);
+  ul.innerHTML = '';
+  itensTexto
+    .split('\n')
+    .map(s => s.trim())
+    .filter(Boolean)
+    .forEach(linha => {
+      const li = document.createElement('li');
+      li.textContent = linha;
+      ul.appendChild(li);
+    });
 }
 
 function atualizarCapa(){
   const cliente = document.getElementById('in-cliente').value.trim() || '—';
   const representante = document.getElementById('in-representante').value.trim() || '—';
   const cidade = document.getElementById('in-cidade').value.trim() || '—';
+  const endereco = document.getElementById('in-endereco').value.trim() || '—';
   const email = document.getElementById('in-email').value.trim() || '—';
   const telefone = document.getElementById('in-telefone').value.trim() || '—';
   const instagram = document.getElementById('in-instagram').value.trim() || '—';
@@ -95,15 +158,49 @@ function atualizarCapa(){
   }
 
   const dataValidade = somarDias(dataProposta, diasValidade);
+  const dataFormatada = formatarDataBR(dataProposta);
+  const validadeFormatada = formatarDataBR(dataValidade);
 
+  // --- Capa (página 1) ---
   document.getElementById('out-cliente').textContent = cliente;
   document.getElementById('out-representante').textContent = representante;
   document.getElementById('out-cidade').textContent = cidade;
-  document.getElementById('out-data').textContent = formatarDataBR(dataProposta);
-  document.getElementById('out-validade').textContent = formatarDataBR(dataValidade);
+  document.getElementById('out-data').textContent = dataFormatada;
+  document.getElementById('out-validade').textContent = validadeFormatada;
   document.getElementById('out-email').textContent = email;
   document.getElementById('out-telefone').textContent = telefone;
   document.getElementById('out-instagram').textContent = instagram;
+
+  // --- Página 2: dados da proposta ---
+  document.getElementById('p2-out-data').textContent = dataFormatada;
+  document.getElementById('p2-out-validade').textContent = validadeFormatada;
+  document.getElementById('p2-out-representante').textContent = representante;
+  document.getElementById('p2-out-telefone').textContent = telefone;
+  document.getElementById('p2-out-email').textContent = email;
+  document.getElementById('p2-out-instagram').textContent = instagram;
+  document.getElementById('p2-out-cliente').textContent = cliente;
+  document.getElementById('p2-out-cidade').textContent = cidade;
+  document.getElementById('p2-out-endereco').textContent = endereco;
+  document.getElementById('p2-out-telefone-footer').textContent = telefone;
+  document.getElementById('p2-out-email-footer').textContent = email;
+  document.getElementById('p2-out-instagram-footer').textContent = instagram;
+
+  // --- Página 2: itens da proposta ---
+  document.getElementById('p2-item-kit-titulo').textContent = document.getElementById('in-kit-titulo').value.trim() || 'Kit';
+  document.getElementById('p2-item-kit-qtd').textContent = document.getElementById('in-kit-qtd').value.trim() || '01';
+  preencherChecklist('p2-item-kit-desc', document.getElementById('in-kit-desc').value);
+
+  document.getElementById('p2-item-engenharia-titulo').textContent = document.getElementById('in-engenharia-titulo').value.trim() || 'Engenharia';
+  document.getElementById('p2-item-engenharia-qtd').textContent = document.getElementById('in-engenharia-qtd').value.trim() || '01';
+  preencherChecklist('p2-item-engenharia-desc', document.getElementById('in-engenharia-desc').value);
+
+  document.getElementById('p2-item-instalacao-titulo').textContent = document.getElementById('in-instalacao-titulo').value.trim() || 'Instalação';
+  document.getElementById('p2-item-instalacao-qtd').textContent = document.getElementById('in-instalacao-qtd').value.trim() || '01';
+  preencherChecklist('p2-item-instalacao-desc', document.getElementById('in-instalacao-desc').value);
+
+  // --- Página 2: destaques do sistema ---
+  document.getElementById('p2-out-geracao').textContent = document.getElementById('in-geracao').value.trim() || '10.000';
+  document.getElementById('p2-out-economia').textContent = document.getElementById('in-economia').value.trim() || '95';
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -121,6 +218,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('btn-limpar').addEventListener('click', limparFormulario);
 
   // atualização em tempo real conforme o usuário digita
-  ['in-cliente','in-representante','in-cidade','in-data','in-validade-dias','in-email','in-telefone','in-instagram']
+  ['in-cliente','in-representante','in-cidade','in-endereco','in-data','in-validade-dias',
+   'in-email','in-telefone','in-instagram',
+   'in-kit-titulo','in-kit-desc','in-kit-qtd',
+   'in-engenharia-titulo','in-engenharia-desc','in-engenharia-qtd',
+   'in-instalacao-titulo','in-instalacao-desc','in-instalacao-qtd',
+   'in-geracao','in-economia']
     .forEach(id => document.getElementById(id).addEventListener('input', atualizarCapa));
 });

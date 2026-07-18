@@ -12,6 +12,16 @@
     "cidade": "Santa Maria da Vitória – BA",
     "endereco": "Rua Exemplo, 100",
     "validadeDias": 5,
+    "geracao": {
+      "estado": "Bahia",
+      "municipio": "Santa Maria da Vitória",
+      "potenciaModuloW": 610,
+      "qtdModulos": 20,
+      "perdasPercent": 14,
+      "diasMes": 30,
+      "consumoMedioKwh": 1200,
+      "valorContaAtual": 1250.00
+    },
     "itens": {
       "kit": {
         "titulo": "Kit fotovoltaico",

@@ -8,9 +8,14 @@
 </head>
 <body>
 
+<div class="no-print pdf-bar">
+  <button id="btn-baixar-pdf" type="button">🖨️ Baixar PDF</button>
+  <span class="pdf-hint">Na janela de impressão, selecione "Salvar como PDF", papel A4 e margens "Nenhuma".</span>
+</div>
+
 <!-- ===================== PÁGINA 1 — CAPA (ilustração vetorial) ===================== -->
 <section class="page cover" id="capa">
-<svg id="capa-svg" width="595" height="842" viewBox="0 0 595 842" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg id="capa-svg" width="210mm" height="297mm" viewBox="0 0 595 842" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
     <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#1a2a52"/>
@@ -335,9 +340,9 @@
     <div class="p2-lowcard p2-lowcard-dark">
       <h3>KIT FOTOVOLTAICO</h3>
       <div class="p2-kit-photos">
-        <img src="images/painel.webp" alt="Painel solar">
-        <img src="images/inversor.png" alt="Inversor">
-        <img src="images/estrutura.webp" alt="Estrutura de fixação">
+        <img src="images/kit-painel.png" alt="Painel solar">
+        <img src="images/kit-inversor.png" alt="Inversor">
+        <img src="images/kit-estrutura.png" alt="Estrutura de fixação">
       </div>
       <div class="p2-kit-feats">
         <div><span>🛡️</span>Equipamentos de alta qualidade</div>
@@ -364,6 +369,73 @@
     <span>📞 <span id="p2-out-telefone-footer">—</span></span>
     <span>✉️ <span id="p2-out-email-footer">—</span></span>
     <span>📷 <span id="p2-out-instagram-footer">—</span></span>
+  </div>
+
+</section>
+
+<!-- ===================== PÁGINA 3 — ESTIMATIVA DE GERAÇÃO ===================== -->
+<section class="page page4" id="pagina4">
+
+  <div class="p2-header">
+    <div class="p2-badge">04</div>
+    <h2 class="p2-title">PROPOSTA COMERCIAL</h2>
+    <img src="images/logo-enner.png" alt="Enner Engenharia" class="p2-logo">
+  </div>
+
+  <h1 class="p4-heading">ESTIMATIVA DE GERAÇÃO</h1>
+
+  <div class="p4-capacidade">
+    <span class="p4-capacidade-icon">⚡</span>
+    CAPACIDADE DE GERAÇÃO: <strong id="p4-out-capacidade">—</strong> kWh/mês
+  </div>
+
+  <div class="p4-chart-card">
+    <h3>GRÁFICO DE PRODUÇÃO E CONSUMO</h3>
+    <p class="p4-chart-sub">Estimativa de geração e consumo mensal</p>
+    <div id="p4-grafico" class="p4-grafico"></div>
+    <div class="p4-legenda">
+      <span><i class="p4-dot" style="background:#f5821f"></i> Geração</span>
+      <span><i class="p4-dot" style="background:#16233f"></i> Consumo médio</span>
+    </div>
+    <p class="p4-fonte" id="p4-out-fonte">Selecione o estado e o município no formulário para calcular.</p>
+  </div>
+
+  <div class="p4-economize">
+    <span class="p4-economize-icon">📈</span> ECONOMIZE NA SUA CONTA DE ENERGIA
+  </div>
+
+  <div class="p4-comparativo">
+    <div class="p4-comp-card p4-comp-sem">
+      <span class="p4-comp-icon">👎</span>
+      <div>
+        <span class="p4-comp-titulo">SEM ENERGIA SOLAR</span>
+        <span class="p4-comp-label">TOTAL A PAGAR</span>
+        <span class="p4-comp-valor" id="p4-out-conta-sem">R$ 0,00</span>
+      </div>
+    </div>
+    <div class="p4-comp-card p4-comp-com">
+      <span class="p4-comp-icon">👍</span>
+      <div>
+        <span class="p4-comp-titulo">COM ENERGIA SOLAR ENNER</span>
+        <span class="p4-comp-label">TOTAL A PAGAR</span>
+        <span class="p4-comp-valor" id="p4-out-conta-com">R$ 0,00</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="p4-resumo">
+    <div><span class="p4-resumo-icon">💰</span><span class="p4-resumo-label">economia mensal</span><span class="p4-resumo-valor" id="p4-out-economia-mensal">R$ 0,00</span></div>
+    <div><span class="p4-resumo-icon">🔄</span><span class="p4-resumo-label">economia anual</span><span class="p4-resumo-valor" id="p4-out-economia-anual">R$ 0,00</span></div>
+    <div><span class="p4-resumo-icon">📊</span><span class="p4-resumo-label">economia em 25 anos *</span><span class="p4-resumo-valor" id="p4-out-economia-25anos">R$ 0,00</span></div>
+    <div><span class="p4-resumo-icon">🥧</span><span class="p4-resumo-label">redução na conta</span><span class="p4-resumo-valor" id="p4-out-reducao">0%</span></div>
+  </div>
+  <p class="p4-obs">* Estimativa considerando geração constante ao longo da vida útil do sistema.</p>
+
+  <!-- FOOTER -->
+  <div class="p2-footer">
+    <span>📞 <span id="p4-out-telefone-footer">—</span></span>
+    <span>✉️ <span id="p4-out-email-footer">—</span></span>
+    <span>📷 <span id="p4-out-instagram-footer">—</span></span>
   </div>
 
 </section>
@@ -402,6 +474,9 @@
     <label>Nome do representante
       <input type="text" id="in-representante" placeholder="Ex: Eng. Hiago Macedo">
     </label>
+    <label>Telefone do representante
+      <input type="text" id="in-representante-telefone" placeholder="Ex: (71) 9 9923-9315">
+    </label>
   </fieldset>
 
   <fieldset>
@@ -411,6 +486,48 @@
     </label>
     <label>Endereço
       <input type="text" id="in-endereco" placeholder="Ex: Rua Exemplo, 100">
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Localização (para cálculo de irradiação solar)</legend>
+    <div class="autocomplete-wrap">
+      <label>Estado
+        <input type="text" id="in-estado" placeholder="Digite o estado...">
+      </label>
+      <div id="list-estado" class="autocomplete-list"></div>
+    </div>
+    <div class="autocomplete-wrap">
+      <label>Município
+        <input type="text" id="in-municipio" placeholder="Selecione o estado primeiro" disabled>
+      </label>
+      <div id="list-municipio" class="autocomplete-list"></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Dimensionamento do sistema</legend>
+    <label>Potência do módulo (Wp)
+      <input type="number" id="in-potencia-modulo" value="610">
+    </label>
+    <label>Quantidade de módulos
+      <input type="number" id="in-qtd-modulos" value="20">
+    </label>
+    <label>Perdas do sistema (%)
+      <input type="number" id="in-perdas" value="14">
+    </label>
+    <label>Dias considerados no mês
+      <input type="number" id="in-dias-mes" value="30">
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Conta de energia do cliente</legend>
+    <label>Consumo médio mensal (kWh)
+      <input type="number" id="in-consumo-medio" value="1200">
+    </label>
+    <label>Valor atual da conta (R$)
+      <input type="number" step="0.01" id="in-valor-conta" value="1250">
     </label>
   </fieldset>
 
@@ -476,6 +593,9 @@ Monitoramento"></textarea>
   <button id="btn-gerar">Gerar capa</button>
 </section>
 
+<script src="js/autocomplete.js"></script>
+<script src="js/pvgis.js"></script>
+<script src="js/geracao.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

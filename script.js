@@ -16,9 +16,20 @@ const DADOS_PADRAO_FALLBACK = {
   propostaPadrao: {
     cliente: "Francisco",
     representante: "Eng. Hiago Macedo",
+    representanteTelefone: "(71) 9 8888-7777",
     cidade: "Santa Maria da Vitória – BA",
     endereco: "Rua Exemplo, 100",
     validadeDias: 5,
+    geracao: {
+      estado: "Bahia",
+      municipio: "Santa Maria da Vitória",
+      potenciaModuloW: 610,
+      qtdModulos: 20,
+      perdasPercent: 14,
+      diasMes: 30,
+      consumoMedioKwh: 1200,
+      valorContaAtual: 1250.00
+    },
     itens: {
       kit: {
         titulo: "Kit fotovoltaico",
@@ -83,9 +94,10 @@ function preencherFormularioComDados(dados){
   if(empresa.telefone)   document.getElementById('in-telefone').value = empresa.telefone;
   if(empresa.instagram)  document.getElementById('in-instagram').value = empresa.instagram;
 
-  if(proposta.cliente)        document.getElementById('in-cliente').value = proposta.cliente;
-  if(proposta.representante)  document.getElementById('in-representante').value = proposta.representante;
-  if(proposta.cidade)         document.getElementById('in-cidade').value = proposta.cidade;
+  if(proposta.cliente)              document.getElementById('in-cliente').value = proposta.cliente;
+  if(proposta.representante)        document.getElementById('in-representante').value = proposta.representante;
+  if(proposta.representanteTelefone) document.getElementById('in-representante-telefone').value = proposta.representanteTelefone;
+  if(proposta.cidade)               document.getElementById('in-cidade').value = proposta.cidade;
   if(proposta.endereco)       document.getElementById('in-endereco').value = proposta.endereco;
   if(proposta.validadeDias)   document.getElementById('in-validade-dias').value = proposta.validadeDias;
 
@@ -110,18 +122,39 @@ function preencherFormularioComDados(dados){
   if(destaques.geracaoMensalKwh) document.getElementById('in-geracao').value = destaques.geracaoMensalKwh;
   if(destaques.economiaPercentual) document.getElementById('in-economia').value = destaques.economiaPercentual;
 
+  const geracao = proposta.geracao || {};
+  if(geracao.potenciaModuloW) document.getElementById('in-potencia-modulo').value = geracao.potenciaModuloW;
+  if(geracao.qtdModulos)      document.getElementById('in-qtd-modulos').value = geracao.qtdModulos;
+  if(geracao.perdasPercent !== undefined) document.getElementById('in-perdas').value = geracao.perdasPercent;
+  if(geracao.diasMes)         document.getElementById('in-dias-mes').value = geracao.diasMes;
+  if(geracao.consumoMedioKwh) document.getElementById('in-consumo-medio').value = geracao.consumoMedioKwh;
+  if(geracao.valorContaAtual !== undefined) document.getElementById('in-valor-conta').value = geracao.valorContaAtual;
+
+  if(geracao.estado && geracao.municipio && window.aplicarLocalizacaoPadrao){
+    window.aplicarLocalizacaoPadrao(geracao.estado, geracao.municipio);
+  }
+
   atualizarCapa();
 }
 
 function limparFormulario(){
-  ['in-email','in-telefone','in-instagram','in-cliente','in-representante','in-cidade','in-endereco',
+  ['in-email','in-telefone','in-instagram','in-cliente','in-representante','in-representante-telefone','in-cidade','in-endereco',
    'in-kit-titulo','in-kit-desc','in-kit-qtd',
    'in-engenharia-titulo','in-engenharia-desc','in-engenharia-qtd',
    'in-instalacao-titulo','in-instalacao-desc','in-instalacao-qtd',
-   'in-geracao','in-economia']
+   'in-geracao','in-economia','in-estado','in-consumo-medio','in-valor-conta']
     .forEach(id => document.getElementById(id).value = '');
   document.getElementById('in-validade-dias').value = 5;
+  document.getElementById('in-potencia-modulo').value = 610;
+  document.getElementById('in-qtd-modulos').value = 20;
+  document.getElementById('in-perdas').value = 14;
+  document.getElementById('in-dias-mes').value = 30;
+  const inputMunicipio = document.getElementById('in-municipio');
+  inputMunicipio.value = '';
+  inputMunicipio.disabled = true;
+  inputMunicipio.placeholder = 'Selecione o estado primeiro';
   atualizarCapa();
+  if(window.atualizarPagina4) window.atualizarPagina4();
 }
 
 function preencherChecklist(ulId, itensTexto){
@@ -141,6 +174,7 @@ function preencherChecklist(ulId, itensTexto){
 function atualizarCapa(){
   const cliente = document.getElementById('in-cliente').value.trim() || '—';
   const representante = document.getElementById('in-representante').value.trim() || '—';
+  const representanteTelefone = document.getElementById('in-representante-telefone').value.trim() || '—';
   const cidade = document.getElementById('in-cidade').value.trim() || '—';
   const endereco = document.getElementById('in-endereco').value.trim() || '—';
   const email = document.getElementById('in-email').value.trim() || '—';
@@ -175,7 +209,7 @@ function atualizarCapa(){
   document.getElementById('p2-out-data').textContent = dataFormatada;
   document.getElementById('p2-out-validade').textContent = validadeFormatada;
   document.getElementById('p2-out-representante').textContent = representante;
-  document.getElementById('p2-out-telefone').textContent = telefone;
+  document.getElementById('p2-out-telefone').textContent = representanteTelefone;
   document.getElementById('p2-out-email').textContent = email;
   document.getElementById('p2-out-instagram').textContent = instagram;
   document.getElementById('p2-out-cliente').textContent = cliente;
@@ -184,6 +218,11 @@ function atualizarCapa(){
   document.getElementById('p2-out-telefone-footer').textContent = telefone;
   document.getElementById('p2-out-email-footer').textContent = email;
   document.getElementById('p2-out-instagram-footer').textContent = instagram;
+
+  // --- Página 4: rodapé (mesmos dados da empresa) ---
+  document.getElementById('p4-out-telefone-footer').textContent = telefone;
+  document.getElementById('p4-out-email-footer').textContent = email;
+  document.getElementById('p4-out-instagram-footer').textContent = instagram;
 
   // --- Página 2: itens da proposta ---
   document.getElementById('p2-item-kit-titulo').textContent = document.getElementById('in-kit-titulo').value.trim() || 'Kit';
@@ -211,6 +250,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   preencherFormularioComDados(dadosPadrao);
 
   document.getElementById('btn-gerar').addEventListener('click', atualizarCapa);
+  document.getElementById('btn-baixar-pdf').addEventListener('click', () => window.print());
   document.getElementById('btn-carregar-json').addEventListener('click', async () => {
     const dados = await carregarDadosPadrao();
     preencherFormularioComDados(dados);
@@ -218,7 +258,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('btn-limpar').addEventListener('click', limparFormulario);
 
   // atualização em tempo real conforme o usuário digita
-  ['in-cliente','in-representante','in-cidade','in-endereco','in-data','in-validade-dias',
+  ['in-cliente','in-representante','in-representante-telefone','in-cidade','in-endereco','in-data','in-validade-dias',
    'in-email','in-telefone','in-instagram',
    'in-kit-titulo','in-kit-desc','in-kit-qtd',
    'in-engenharia-titulo','in-engenharia-desc','in-engenharia-qtd',

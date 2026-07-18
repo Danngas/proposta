@@ -33,6 +33,30 @@ body{
   padding: 32px 12px;
 }
 
+.pdf-bar{
+  width: 210mm;
+  max-width: 100%;
+  display:flex;
+  align-items:center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+#btn-baixar-pdf{
+  background: var(--orange);
+  color: var(--navy-deep);
+  border:none;
+  padding: 10px 18px;
+  font-weight:700;
+  border-radius: 6px;
+  cursor:pointer;
+  font-size: 13px;
+}
+#btn-baixar-pdf:hover{ background: var(--orange-deep); }
+.pdf-hint{
+  font-size: 11px;
+  color: #d7dce6;
+}
+
 .page{
   background: var(--white);
   box-shadow: 0 10px 40px rgba(0,0,0,0.35);
@@ -40,8 +64,8 @@ body{
 
 /* ============ CAPA ============ */
 .cover{
-  width: 595px;
-  height: 842px;
+  width: 210mm;
+  height: 297mm;
   position: relative;
   overflow: hidden;
   background: var(--navy-deep);
@@ -55,13 +79,14 @@ body{
 
 /* ============ PÁGINA 2 — ITENS DA PROPOSTA ============ */
 .page2{
-  width: 595px;
-  min-height: 842px;
+  width: 210mm;
+  min-height: 297mm;
   background: var(--white);
-  padding: 26px 28px 30px;
+  padding: 32px 40px 36px;
   position: relative;
   overflow: hidden;
   color: var(--navy-deep);
+  box-sizing: border-box;
 }
 
 .p2-header{
@@ -172,17 +197,127 @@ body{
   font-size:10.5px; font-weight:700;
 }
 
+/* ============ PÁGINA 4 — ESTIMATIVA DE GERAÇÃO ============ */
+.page4{
+  width: 210mm;
+  min-height: 297mm;
+  background: var(--white);
+  padding: 32px 40px 36px;
+  position: relative;
+  color: var(--navy-deep);
+  box-sizing: border-box;
+}
+
+.p4-heading{
+  font-family: var(--font-display);
+  font-size: 26px;
+  margin: 8px 0 14px;
+  color: var(--navy-deep);
+}
+
+.p4-capacidade{
+  display:flex; align-items:center; gap:10px;
+  font-size: 14px; font-weight:600; color: var(--navy-deep);
+  margin-bottom: 20px;
+}
+.p4-capacidade-icon{
+  background: var(--orange); color: var(--white);
+  width:26px; height:26px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-size:13px;
+}
+.p4-capacidade strong{ color: var(--orange-deep); font-size:16px; }
+
+.p4-chart-card{
+  border: 1px dashed var(--orange);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 22px;
+}
+.p4-chart-card h3{
+  font-family: var(--font-display);
+  font-size: 15px; text-align:center; margin:0 0 4px; color: var(--navy-deep);
+}
+.p4-chart-sub{ text-align:center; font-size:10px; color:#8a92a3; margin:0 0 12px; }
+.p4-grafico{ width:100%; height:190px; }
+.p4-legenda{ display:flex; justify-content:center; gap:24px; margin-top:8px; font-size:10.5px; color:#333; }
+.p4-dot{ display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:5px; vertical-align:middle; }
+.p4-fonte{ text-align:center; font-size:9px; color:#9099a8; margin: 10px 0 0; }
+
+.p4-economize{
+  background: var(--navy-deep);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: 14px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  display:flex; align-items:center; gap:10px;
+  margin-bottom: 16px;
+}
+.p4-economize-icon{ color: var(--orange); }
+
+.p4-comparativo{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px; }
+.p4-comp-card{
+  display:flex; align-items:center; gap:12px;
+  border-radius:12px; padding:16px;
+}
+.p4-comp-sem{ background:#fdecec; border:1px solid #f3c9c9; }
+.p4-comp-com{ background:#eaf7ef; border:1px solid #bfe6cc; }
+.p4-comp-icon{ font-size:22px; }
+.p4-comp-titulo{ display:block; font-size:11px; font-weight:800; color:var(--navy-deep); margin-bottom:6px; }
+.p4-comp-label{ display:block; font-size:9px; color:#6b7280; }
+.p4-comp-valor{ display:block; font-size:19px; font-weight:800; }
+.p4-comp-sem .p4-comp-valor{ color:#d64545; }
+.p4-comp-com .p4-comp-valor{ color:#2e9e56; }
+
+.p4-resumo{
+  display:grid; grid-template-columns: repeat(4,1fr); gap:12px;
+  background:#f4f6f9; border:1px solid #e5e9f0; border-radius:12px;
+  padding: 16px; margin-bottom: 8px;
+}
+.p4-resumo > div{ text-align:center; }
+.p4-resumo-icon{ display:block; font-size:16px; margin-bottom:4px; }
+.p4-resumo-label{ display:block; font-size:9px; color:#6b7280; text-transform:uppercase; letter-spacing:0.03em; margin-bottom:3px; }
+.p4-resumo-valor{ display:block; font-size:12px; font-weight:800; color:var(--orange-deep); }
+
+.p4-obs{ font-size:8.5px; color:#9099a8; margin: 0 0 22px; }
+
 /* ============ FORMULÁRIO (interface, não impresso) ============ */
 .form-panel{
-  width: 794px;
+  width: 210mm;
   padding: 28px 36px 40px;
   border-radius: 8px;
+  box-sizing: border-box;
 }
 .form-panel h2{
   font-family: var(--font-display);
   color: var(--navy-deep);
   margin-top:0;
 }
+.autocomplete-wrap{ position: relative; margin-bottom: 10px; }
+.autocomplete-list{
+  display:none;
+  position:absolute;
+  top: 100%; left:0; right:0;
+  max-height: 220px;
+  overflow-y:auto;
+  background: var(--white);
+  border: 1px solid #cfd6e0;
+  border-top:none;
+  border-radius: 0 0 6px 6px;
+  z-index: 20;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+}
+.autocomplete-list.open{ display:block; }
+.autocomplete-item{
+  padding: 8px 10px;
+  font-size: 13px;
+  cursor:pointer;
+}
+.autocomplete-item:hover, .autocomplete-item.active{
+  background: rgba(245,166,35,0.12);
+  color: var(--orange-deep);
+}
+
 fieldset{
   border: 1px solid #dde2ea;
   border-radius: 8px;
@@ -258,12 +393,28 @@ input:focus, textarea:focus{
 #btn-gerar:hover{ background: var(--orange-deep); }
 
 @media print{
+  @page{
+    size: A4;
+    margin: 0;
+  }
   .no-print{ display:none !important; }
   body{ background: var(--white); padding:0; gap:0; }
-  .cover{ box-shadow:none; }
+  .page{ box-shadow:none; }
+  #capa{
+    page-break-after: always;
+    break-after: page;
+  }
+  #pagina2{
+    page-break-after: always;
+    break-after: page;
+  }
+  #pagina4{
+    page-break-after: auto;
+    break-after: auto;
+  }
 }
 
 @media (max-width: 820px){
-  .cover, .form-panel{ width: 100%; }
-  .cover{ height: auto; min-height: 1123px; }
+  .cover, .page2, .page4, .form-panel{ width: 100%; max-width: 210mm; }
+  .cover{ height: auto; aspect-ratio: 210 / 297; }
 }

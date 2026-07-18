@@ -1,0 +1,14 @@
+{
+  "empresa": {
+    "nome": "Enner Engenharia",
+    "email": "suporte.enner@gmail.com",
+    "telefone": "(71) 9 9923-9315",
+    "instagram": "@enner.engenharia"
+  },
+  "propostaPadrao": {
+    "cliente": "Francisco",
+    "representante": "Eng. Hiago Macedo",
+    "cidade": "Santa Maria da Vitória – BA",
+    "validadeDias": 5
+  }
+}

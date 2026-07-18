@@ -157,6 +157,26 @@ function limparFormulario(){
   if(window.atualizarPagina4) window.atualizarPagina4();
 }
 
+// Gera o QR Code do WhatsApp da empresa a partir do telefone cadastrado.
+// Usa a API pública do goqr.me (gratuita, sem necessidade de biblioteca extra).
+function atualizarQRCodeWhatsApp(telefoneFormatado){
+  const img = document.getElementById('p5-qr-img');
+  if(!img) return;
+
+  const apenasDigitos = telefoneFormatado.replace(/\D/g, '');
+  if(!apenasDigitos){
+    img.removeAttribute('src');
+    return;
+  }
+
+  // Garante o código do país (55 = Brasil) sem duplicar caso já esteja presente
+  const numeroComPais = apenasDigitos.startsWith('55') ? apenasDigitos : `55${apenasDigitos}`;
+  const linkWhatsApp = `https://wa.me/${numeroComPais}`;
+
+  img.src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=0&data=${encodeURIComponent(linkWhatsApp)}`;
+  img.alt = `QR Code para WhatsApp ${telefoneFormatado}`;
+}
+
 function preencherChecklist(ulId, itensTexto){
   const ul = document.getElementById(ulId);
   ul.innerHTML = '';
@@ -223,6 +243,17 @@ function atualizarCapa(){
   document.getElementById('p4-out-telefone-footer').textContent = telefone;
   document.getElementById('p4-out-email-footer').textContent = email;
   document.getElementById('p4-out-instagram-footer').textContent = instagram;
+
+  // --- Página 5: obrigado / contato / termo de aceite ---
+  document.getElementById('p5-out-cliente').textContent = cliente;
+  document.getElementById('p5-out-telefone').textContent = telefone;
+  document.getElementById('p5-out-email').textContent = email;
+  document.getElementById('p5-out-instagram').textContent = instagram;
+  document.getElementById('p5-out-cidade').textContent = cidade;
+  document.getElementById('p5-out-telefone-footer').textContent = telefone;
+  document.getElementById('p5-out-email-footer').textContent = email;
+  document.getElementById('p5-out-instagram-footer').textContent = instagram;
+  atualizarQRCodeWhatsApp(telefone);
 
   // --- Página 2: itens da proposta ---
   document.getElementById('p2-item-kit-titulo').textContent = document.getElementById('in-kit-titulo').value.trim() || 'Kit';

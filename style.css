@@ -331,7 +331,7 @@ body{
 .p5-paragrafo strong{ color: var(--orange-deep); }
 
 .p5-hero-foto{
-  border-radius: 45% 55% 60% 40% / 55% 40% 60% 45%;
+  border-radius: 50%;
   overflow:hidden;
   border: 5px solid var(--orange);
   aspect-ratio: 1;
